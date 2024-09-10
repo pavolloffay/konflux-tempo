@@ -3,15 +3,15 @@
 set -e
 
 # The pullspec should be image index, check if all architectures are there with: skopeo inspect --raw docker://$IMG | jq
-export TEMPO_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/otel/otel-operator@sha256:8c38d3ea6ff2efb01947b12fc48be6ba54ab20b68b234cf1bb72d7e42ea5b339"
+export TEMPO_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-tempo@sha256:3632a2a6fd07cfa1426ac91b6f5ce048f2bd7a9db1ea99e26476750daae55fe9"
 # Separate due to merge conflicts
-export TEMPO_QUERY_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/otel/otel-target-allocator@sha256:64a01a04a21d230df93bb377660b37648b9f724479e9adf47653866597725baf"
+export TEMPO_QUERY_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-query@sha256:fc238f6c69400bc9376516562162ab349968ec5ec22db16f7d3efc8261d2c9ed"
 # Separate due to merge conflicts
-export TEMPO_OPERATOR_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/otel/otel-operator@sha256:8c38d3ea6ff2efb01947b12fc48be6ba54ab20b68b234cf1bb72d7e42ea5b339"
+export TEMPO_OPERATOR_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-operator@sha256:28cfb6fe110c0ee68108b400c4e3a2d57999ad836c3a044bce42c7205370f7fd"
 # separate due to merge conflicts
-export TEMPO_GATEWAY_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/otel/operator@sha256:65f39a2a4df869bf9f59bad92ca8094efb3d07e55b68f2a83edb32153fa52d7e"
+export TEMPO_GATEWAY_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-gateway@sha256:0d8e5516172832e434ba78431e10b819577c4b76e1f5e07014842dd704b8ea77"
 # separate due to merge conflicts
-export TEMPO_OPA_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/otel/operator@sha256:65f39a2a4df869bf9f59bad92ca8094efb3d07e55b68f2a83edb32153fa52d7e"
+export TEMPO_OPA_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-opa@sha256:bca81fc59c12ad12c2ce40fe6b6b0ac593a37c879b31b30bd50241e68b84d430"
 
 
 export CSV_FILE=/manifests/tempo-operator.clusterserviceversion.yaml
