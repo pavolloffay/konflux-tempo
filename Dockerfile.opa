@@ -30,3 +30,4 @@ LABEL com.redhat.component="tempo-gateway-opa-container" \
       description="An OPA-compatible API for making OpenShift access review requests" \
       io.openshift.tags="tracing" \
       io.k8s.display-name="Tempo OPA"
+
