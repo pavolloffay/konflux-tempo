@@ -44,5 +44,3 @@ LABEL com.redhat.component="tempo-operator-container" \
       io.openshift.expose-services="" \
       io.openshift.tags="tracing" \
       io.k8s.display-name="Tempo operator"
-
-

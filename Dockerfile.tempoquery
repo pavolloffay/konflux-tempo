@@ -41,3 +41,4 @@ LABEL com.redhat.component="tempo-query-container" \
       io.openshift.expose-services="16686:http,16687:metrics" \
       io.openshift.tags="tracing" \
       io.k8s.display-name="Tempo Query"
+
