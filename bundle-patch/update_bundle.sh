@@ -5,7 +5,7 @@ set -e
 # The pullspec should be image index, check if all architectures are there with: skopeo inspect --raw docker://$IMG | jq
 export TEMPO_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-tempo@sha256:3632a2a6fd07cfa1426ac91b6f5ce048f2bd7a9db1ea99e26476750daae55fe9"
 # Separate due to merge conflicts
-export TEMPO_QUERY_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-query@sha256:fc238f6c69400bc9376516562162ab349968ec5ec22db16f7d3efc8261d2c9ed"
+export TEMPO_QUERY_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-query@sha256:ce900fca4102c11a23901132be20b54e1c68c5241bf31f673bf448cf93e47170"
 # Separate due to merge conflicts
 export TEMPO_OPERATOR_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-operator@sha256:28cfb6fe110c0ee68108b400c4e3a2d57999ad836c3a044bce42c7205370f7fd"
 # separate due to merge conflicts
