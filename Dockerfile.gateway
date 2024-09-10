@@ -1,0 +1,32 @@
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_8_golang_1.22 as builder
+
+WORKDIR /opt/app-root/src
+USER root
+
+COPY api .
+# this directory is checked by ecosystem-cert-preflight-checks task in Konflux
+COPY api/LICENSE /licenses/
+
+RUN CGO_ENABLED=1 GOEXPERIMENT=strictfipsruntime go build -mod=mod -tags strictfipsruntime -o tempostack-gateway -trimpath -ldflags "-s -w"
+
+FROM registry.redhat.io/ubi8/ubi-minimal:8.10-1052.1724178568
+WORKDIR /
+
+RUN microdnf update -y && rm -rf /var/cache/yum && \
+    microdnf install openssl -y && \
+    microdnf clean all
+
+RUN mkdir /licenses
+COPY api/LICENSE /licenses/.
+COPY --from=builder /opt/app-root/src/tempostack-gateway /usr/bin/tempostack-gateway
+
+ARG USER_UID=1001
+USER ${USER_UID}
+ENTRYPOINT ["/usr/bin/tempostack-gateway"]
+
+LABEL com.redhat.component="tempo-gateway-container" \
+      name="rhosdt/tempo-gateway-rhel8" \
+      summary="Tempo Gateway" \
+      description="Horizontally-scalable authn/authz-securing reverse proxy for Tempo." \
+      io.openshift.tags="tracing" \
+      io.k8s.display-name="Tempo Gateway"

@@ -1,0 +1,43 @@
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_8_golang_1.22 as builder
+
+WORKDIR /opt/app-root/src
+USER root
+
+COPY tempo .
+# this directory is checked by ecosystem-cert-preflight-checks task in Konflux
+COPY tempo/LICENSE /licenses/
+
+RUN export GIT_BRANCH=`git rev-parse --abbrev-ref HEAD` && \
+  export GIT_REVISION=`git rev-parse --short HEAD` && \
+  export VERSION=`./tools/image-tag | cut -d, -f 1` &&  \
+  CGO_ENABLED=1 GOEXPERIMENT=strictfipsruntime go build -C ./cmd/tempo-query -tags strictfipsruntime -buildvcs=false -mod vendor \
+    -ldflags "-X main.Branch=${GIT_BRANCH} -X main.Revision=${GIT_REVISION} -X main.Version=${VERSION}" \
+    -o "tempo-query" -trimpath -ldflags "-s -w"
+
+# We extend the rhosdt-jaeger-query-rhel8 container by adding a new gRPC storage plugin,
+# while still using the entrypoint of the rhosdt-jaeger-query-rhel8 image.
+FROM registry-proxy.engineering.redhat.com/rh-osbs/rhosdt-jaeger-query-rhel8 as jaeger
+
+FROM registry.redhat.io/ubi8/ubi-minimal:8.10-1052.1724178568
+WORKDIR /
+
+RUN microdnf update -y && rm -rf /var/cache/yum && \
+    microdnf install openssl -y && \
+    microdnf clean all
+
+RUN mkdir /licenses
+COPY tempo/LICENSE /licenses/.
+COPY --from=builder /opt/app-root/src/cmd/tempo-query/tempo-query /usr/bin/tempo-query
+COPY --from=jaeger go/bin/query-linux-fips /usr/bin/tempo-query
+
+ARG USER_UID=1001
+USER ${USER_UID}
+ENTRYPOINT ["/usr/bin/tempo-query"]
+
+LABEL com.redhat.component="tempo-query-container" \
+      name="rhosdt/tempo-query-rhel8" \
+      summary="Tempo Query" \
+      description="Jaeger query container for Tempo" \
+      io.openshift.expose-services="16686:http,16687:metrics" \
+      io.openshift.tags="tracing" \
+      io.k8s.display-name="Tempo Query"

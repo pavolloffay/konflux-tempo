@@ -1,0 +1,38 @@
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_8_golang_1.22 as builder
+
+WORKDIR /opt/app-root/src
+USER root
+
+COPY tempo .
+# this directory is checked by ecosystem-cert-preflight-checks task in Konflux
+COPY tempo/LICENSE /licenses/
+
+RUN export GIT_BRANCH=`git rev-parse --abbrev-ref HEAD` && \
+  export GIT_REVISION=`git rev-parse --short HEAD` && \
+  export VERSION=`./tools/image-tag | cut -d, -f 1` &&  \
+  CGO_ENABLED=1 GOEXPERIMENT=strictfipsruntime go build -C ./cmd/tempo -tags strictfipsruntime -buildvcs=false -mod vendor \
+    -ldflags "-X main.Branch=${GIT_BRANCH} -X main.Revision=${GIT_REVISION} -X main.Version=${VERSION}" \
+    -o "tempo" -trimpath -ldflags "-s -w"
+
+FROM registry.redhat.io/ubi8/ubi-minimal:8.10-1052.1724178568
+WORKDIR /
+
+RUN microdnf update -y && rm -rf /var/cache/yum && \
+    microdnf install openssl -y && \
+    microdnf clean all
+
+RUN mkdir /licenses
+COPY tempo/LICENSE /licenses/.
+COPY --from=builder /opt/app-root/src/cmd/tempo/tempo /usr/bin/tempo
+
+ARG USER_UID=1001
+USER ${USER_UID}
+ENTRYPOINT ["/usr/bin/tempo"]
+
+LABEL com.redhat.component="tempo-container" \
+      name="rhosdt/tempo-rhel8" \
+      summary="Tempo server" \
+      description="Container for Tempo application" \
+      io.openshift.expose-services="3100:http,4317:otlp-grpc,4318:otlp-http" \
+      io.openshift.tags="tracing" \
+      io.k8s.display-name="Tempo"
