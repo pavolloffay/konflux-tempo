@@ -16,7 +16,7 @@ RUN export GIT_BRANCH=`git rev-parse --abbrev-ref HEAD` && \
 
 # We extend the rhosdt-jaeger-query-rhel8 container by adding a new gRPC storage plugin,
 # while still using the entrypoint of the rhosdt-jaeger-query-rhel8 image.
-FROM registry-proxy.engineering.redhat.com/rh-osbs/rhosdt-jaeger-query-rhel8 as jaeger
+FROM brew.registry.redhat.io/rh-osbs/rhosdt-jaeger-query-rhel8 as jaeger
 
 FROM registry.redhat.io/ubi8/ubi-minimal:8.10-1052.1724178568
 WORKDIR /
