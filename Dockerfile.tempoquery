@@ -59,6 +59,7 @@ COPY --from=builder /opt/app-root/src/cmd/tempo-query/tempo-query /usr/bin/tempo
 
 ENV SPAN_STORAGE_TYPE=grpc-plugin \
     GRPC_STORAGE_PLUGIN_BINARY=/usr/bin/tempo-query
+EXPOSE 16686
 
 ARG USER_UID=1001
 USER ${USER_UID}
