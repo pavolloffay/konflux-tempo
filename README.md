@@ -8,6 +8,8 @@ This repository contains Konflux configuration to build Red Hat OpenShift distri
 docker login brew.registry.redhat.io -u
 docker login registry.redhat.io -u
 
+git submodule update --init --recursive
+
 podman build -t docker.io/user/tempo-operator:$(date +%s) -f Dockerfile.operator
 ```
 
