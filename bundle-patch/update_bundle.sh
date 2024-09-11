@@ -9,7 +9,7 @@ export TEMPO_QUERY_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/t
 # Separate due to merge conflicts
 export TEMPO_OPERATOR_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-operator@sha256:06b2c5b4081103bc34c53d3a1823eeda3cb24e9a9a17996ce55947c610b347b2"
 # separate due to merge conflicts
-export TEMPO_GATEWAY_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-gateway@sha256:0d8e5516172832e434ba78431e10b819577c4b76e1f5e07014842dd704b8ea77"
+export TEMPO_GATEWAY_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-gateway@sha256:5a77802d22e7f1d23279e6e05da98295ef3a07c3f03bbd206b232edf10fe6e8d"
 # separate due to merge conflicts
 export TEMPO_OPA_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-opa@sha256:d4a222f95929c55672263f60e8733d6b23ac9ece42c8723876807007b3856ad0"
 
