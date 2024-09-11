@@ -12,7 +12,8 @@ metadata:
       ".tekton/tempo-query-pull-request.yaml".pathChanged() ||
       ".tekton/tempo-query-push.yaml".pathChanged() ||
       "Dockerfile.tempoquery".pathChanged() ||
-      "tempo".pathChanged())
+      "tempo".pathChanged() ||
+      "jaeger".pathChanged())
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: tempo
