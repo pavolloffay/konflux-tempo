@@ -13,7 +13,7 @@ metadata:
     features.operators.openshift.io/token-auth-azure: "false"
     features.operators.openshift.io/token-auth-gcp: "false"
     olm.skipRange: '>=0.6.0 <0.13.0-100'
-  name: tempo-operator.v0.16.0-100
+  name: tempo-operator.v0.13.0-100
 spec:
   version: 0.13.0-100
   replaces: tempo-operator.v0.13.0-1

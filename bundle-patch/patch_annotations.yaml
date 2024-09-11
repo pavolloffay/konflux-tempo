@@ -5,3 +5,5 @@ extra_annotations:
   operators.operatorframework.io.test.mediatype.v1: scorecard+v1
   operators.operatorframework.io.metrics.project_layout: go.kubebuilder.io/v3
 
+  com.redhat.openshift.versions: v4.12
+

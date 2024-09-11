@@ -26,6 +26,19 @@ def get_container(containers_array, container_name):
             return c_container
     return None
 
+def merge_lists_by_key(a: list, b: list, key: str) -> list:
+    """Merge two lists by a key
+
+    Example:
+    Merging [{name: tempo, value: 123}, {name: gateway, value: 1}] and [{name: tempo, value: 234}]
+    gives [{name: tempo, value: 234}, {name: gateway, value: 1}]
+    """
+    a_by_key = {e[key]: e for e in a}
+    b_by_key = {e[key]: e for e in b}
+    merged_by_key = {**a_by_key, **b_by_key}
+    return list(merged_by_key.values())
+
+
 timestamp = int(os.getenv('EPOC_TIMESTAMP'))
 datetime_time = datetime.fromtimestamp(timestamp)
 upstream_csv = load_manifest(os.getenv('CSV_FILE'))
@@ -95,10 +108,8 @@ with open('./patch_csv.yaml') as pf:
 
         # env vars
         if container.get('extra_env') is not None:
-            if  upstream_container.get('env') is not None:
-                upstream_container['env'] = upstream_container.get('env') + container.get('extra_env')
-            else:
-                upstream_container['env'] = container.get('extra_env')
+            env = merge_lists_by_key(upstream_container.get("env", []), container.get("extra_env", []), "name")
+            upstream_container['env'] = env
 
         # volume mounts
         if container.get('extra_volumeMounts') is not None:
