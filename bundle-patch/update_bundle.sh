@@ -11,7 +11,7 @@ export TEMPO_OPERATOR_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenan
 # separate due to merge conflicts
 export TEMPO_GATEWAY_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-gateway@sha256:5a77802d22e7f1d23279e6e05da98295ef3a07c3f03bbd206b232edf10fe6e8d"
 # separate due to merge conflicts
-export TEMPO_OPA_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-opa@sha256:d4a222f95929c55672263f60e8733d6b23ac9ece42c8723876807007b3856ad0"
+export TEMPO_OPA_IMAGE_PULLSPEC="quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-opa@sha256:474356fe1dbcbda99ebd190b257f5b4ee7f6706349db4b4451be9cef30ba0b5c"
 
 
 export CSV_FILE=/manifests/tempo-operator.clusterserviceversion.yaml
