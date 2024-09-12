@@ -27,7 +27,7 @@ spec:
   - name: revision
     value: '{{revision}}'
   - name: output-image
-    value: quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-tempo:{{revision}}
+    value: quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo:{{revision}}
   - name: dockerfile
     value: Dockerfile.tempo
   - name: path-context
