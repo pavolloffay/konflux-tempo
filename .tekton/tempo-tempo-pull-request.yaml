@@ -2,7 +2,7 @@ apiVersion: tekton.dev/v1
 kind: PipelineRun
 metadata:
   annotations:
-    build.appstudio.openshift.io/repo: https://github.com/pavolloffay/konflux-tempo?rev={{revision}}
+    build.appstudio.openshift.io/repo: https://github.com/os-observability/konflux-tempo?rev={{revision}}
     build.appstudio.redhat.com/commit_sha: '{{revision}}'
     build.appstudio.redhat.com/pull_request_number: '{{pull_request_number}}'
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
@@ -23,7 +23,7 @@ spec:
   - name: revision
     value: '{{revision}}'
   - name: output-image
-    value: quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-tempo:on-pr-{{revision}}
+    value: quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo:on-pr-{{revision}}
   - name: image-expires-after
     value: 5d
   - name: dockerfile
@@ -193,7 +193,7 @@ spec:
         - name: name
           value: prefetch-dependencies
         - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-prefetch-dependencies:0.1@sha256:058a59f72997c9cf1be20978eb6a145d8d4d436c6098f2460bd96766bb363b20
+          value: quay.io/konflux-ci/tekton-catalog/task-prefetch-dependencies:0.1@sha256:fd1fda0dcf53938860ae6fcba37f5572ae25ae02dba44c15754fb7ba7549fb5c
         - name: kind
           value: task
         resolver: bundles
@@ -407,7 +407,7 @@ spec:
         - name: name
           value: clamav-scan
         - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-clamav-scan:0.1@sha256:7bb17b937c9342f305468e8a6d0a22493e3ecde58977bd2ffc8b50e2fa234d58
+          value: quay.io/konflux-ci/tekton-catalog/task-clamav-scan:0.1@sha256:0e61e7fce97b089b216eccd8390b1c2a265454c81c6630449e0f648dfcd4fcfe
         - name: kind
           value: task
         resolver: bundles
