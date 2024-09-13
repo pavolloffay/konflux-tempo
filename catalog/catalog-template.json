@@ -13,6 +13,11 @@
         {
             "entries": [
                 {
+                    "name": "tempo-operator.v0.13.0-100",
+                    "replaces": "tempo-operator.v0.13.0-1",
+                    "skipRange": "\u003e=0.6.0 \u003c0.13.0-100"
+                },
+                {
                     "name": "tempo-operator.v0.1.0-6"
                 },
                 {
@@ -61,6 +66,10 @@
             "name": "stable",
             "package": "tempo-product",
             "schema": "olm.channel"
+        },
+        {
+            "schema": "olm.bundle",
+            "image": "quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-bundle@sha256:145aa0fbb4be5579e072549ac70d159d5b74fe2423ee6f3d797208daf707e1e8"
         },
         {
             "schema": "olm.bundle",
