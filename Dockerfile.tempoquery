@@ -69,6 +69,7 @@ LABEL com.redhat.component="tempo-query-container" \
       name="rhosdt/tempo-query-rhel8" \
       summary="Tempo Query" \
       description="Jaeger query container for Tempo" \
+      io.k8s.description="Jaeger query container for Tempo." \
       io.openshift.expose-services="16686:http,16687:metrics" \
       io.openshift.tags="tracing" \
       io.k8s.display-name="Tempo Query"

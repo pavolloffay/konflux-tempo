@@ -27,7 +27,8 @@ ENTRYPOINT ["/usr/bin/tempostack-gateway"]
 LABEL com.redhat.component="tempo-gateway-container" \
       name="rhosdt/tempo-gateway-rhel8" \
       summary="Tempo Gateway" \
-      description="Horizontally-scalable authn/authz-securing reverse proxy for Tempo." \
+      description="Horizontally-scalable authn/authz-securing reverse proxy for Tempo" \
+      io.k8s.description="Horizontally-scalable authn/authz-securing reverse proxy for Tempo." \
       io.openshift.tags="tracing" \
       io.k8s.display-name="Tempo Gateway"
 
