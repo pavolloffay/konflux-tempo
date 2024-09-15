@@ -31,10 +31,10 @@ LABEL operators.operatorframework.io.metrics.project_layout=go.kubebuilder.io/v3
 LABEL operators.operatorframework.io.test.mediatype.v1=scorecard+v1
 LABEL operators.operatorframework.io.test.config.v1=tests/scorecard/
 
-LABEL com.redhat.openshift.versions=v4.12
 
 LABEL release="0.13.0-100" \
       version="0.13.0-100" \
+      com.redhat.openshift.versions=v4.12 \
       name="rhosdt/tempo-operator-bundle" \
       distribution-scope="public" \
       description="Bundle for Tempo operator" \
