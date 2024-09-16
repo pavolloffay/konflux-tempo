@@ -14,7 +14,7 @@ export TEMPO_GATEWAY_IMAGE_PULLSPEC="registry.redhat.io/rhosdt/tempo-gateway-rhe
 export TEMPO_OPA_IMAGE_PULLSPEC="registry.redhat.io/rhosdt/tempo-opa-rhel8@sha256:035f3c5430f6669e7ba31307fbc6889f8b29655b74f512e91feafa450903c635"
 # Separate due to merge conflicts
 # TODO, we used to set the proxy image per OCP version
-export OSE_KUBER_RBAC_PROXY_PULLSPEC="registry.redhat.io/openshift4/ose-kube-rbac-proxy@sha256:8204d45506297578c8e41bcc61135da0c7ca244ccbd1b39070684dfeb4c2f26c"
+export OSE_KUBE_RBAC_PROXY_PULLSPEC="registry.redhat.io/openshift4/ose-kube-rbac-proxy@sha256:8204d45506297578c8e41bcc61135da0c7ca244ccbd1b39070684dfeb4c2f26c"
 
 
 export CSV_FILE=/manifests/tempo-operator.clusterserviceversion.yaml
@@ -26,7 +26,7 @@ sed -i "s#tempo-container-pullspec#$TEMPO_IMAGE_PULLSPEC#g" patch_csv.yaml
 sed -i "s#tempo-query-container-pullspec#$TEMPO_QUERY_IMAGE_PULLSPEC#g" patch_csv.yaml
 sed -i "s#tempo-gateway-container-pullspec#$TEMPO_GATEWAY_IMAGE_PULLSPEC#g" patch_csv.yaml
 sed -i "s#tempo-opa-container-pullspec#$TEMPO_OPA_IMAGE_PULLSPEC#g" patch_csv.yaml
-sed -i "s#ose-kube-rbac-proxy-container-pullspec#$OSE_KUBER_RBAC_PROXY_PULLSPEC#g" patch_csv.yaml
+sed -i "s#ose-kube-rbac-proxy-container-pullspec#$OSE_KUBE_RBAC_PROXY_PULLSPEC#g" patch_csv.yaml
 
 export AMD64_BUILT=$(skopeo inspect --raw docker://${TEMPO_OPERATOR_IMAGE_PULLSPEC} | jq -e '.manifests[] | select(.platform.architecture=="amd64")')
 export ARM64_BUILT=$(skopeo inspect --raw docker://${TEMPO_OPERATOR_IMAGE_PULLSPEC} | jq -e '.manifests[] | select(.platform.architecture=="arm64")')
