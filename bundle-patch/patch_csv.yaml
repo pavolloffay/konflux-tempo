@@ -79,6 +79,6 @@ spec:
                       - name: RELATED_IMAGE_TEMPO_GATEWAY_OPA
                         value: tempo-opa-container-pullspec
                       - name: RELATED_IMAGE_OAUTH_PROXY
-                        value: registry.redhat.io/openshift4/ose-kube-rbac-proxy:latest
+                        value: ose-kube-rbac-proxy-container-pullspec
                   - name: kube-rbac-proxy
-                    image: 'registry.redhat.io/openshift4/ose-kube-rbac-proxy:latest'
+                    image: ose-kube-rbac-proxy-container-pullspec
