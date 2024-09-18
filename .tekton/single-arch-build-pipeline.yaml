@@ -97,6 +97,9 @@ spec:
         value: "$(params.dockerfile)"
       - name: CONTEXT
         value: "$(params.path-context)"
+      - name: BUILD_ARGS
+        value:
+          - $(params.build-args[*])
       - name: HERMETIC
         value: "$(params.hermetic)"
       - name: PREFETCH_INPUT
@@ -285,6 +288,10 @@ spec:
       description: Path to the source code of an application's component from where to
         build image.
       default: "."
+    - default: []
+      description: Array of --build-arg values ("arg=value" strings) for buildah
+      name: build-args
+      type: array
     - name: dockerfile
       type: string
       description: Path to the Dockerfile inside the context specified by parameter path-context

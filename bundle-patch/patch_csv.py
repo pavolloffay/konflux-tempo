@@ -63,8 +63,9 @@ upstream_csv['spec']['relatedImages'] = [
     {'name': 'tempo', 'image': os.getenv('TEMPO_IMAGE_PULLSPEC')},
     {'name': 'tempo-query', 'image': os.getenv('TEMPO_QUERY_IMAGE_PULLSPEC')},
     {'name': 'gateway', 'image': os.getenv('TEMPO_GATEWAY_IMAGE_PULLSPEC')},
-    {'name': 'opa', 'image': os.getenv('TEMPO_OPA_IMAGE_PULLSPEC')},
-    {'name': 'ose-rbac-proxy', 'image': os.getenv('OSE_KUBE_RBAC_PROXY_PULLSPEC')}]
+    {'name': 'gateway-opa', 'image': os.getenv('TEMPO_OPA_IMAGE_PULLSPEC')},
+    {'name': 'ose-kube-rbac-proxy', 'image': os.getenv('OSE_KUBE_RBAC_PROXY_PULLSPEC')},
+    {'name': 'ose-oauth-proxy', 'image': os.getenv('OSE_OAUTH_PROXY_PULLSPEC')}]
 
 with open('./patch_csv.yaml') as pf:
     patch = yaml.load(pf)

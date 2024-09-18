@@ -13,6 +13,9 @@ COPY tempo-operator/bundle/openshift/metadata /metadata/
 RUN ls /manifests -al
 RUN ls /metadata -al
 
+# stage - registry.stage.redhat.io, prod - registry.redhat.io
+ARG REGISTRY=quay.io/redhat-user-workloads
+
 RUN ./update_bundle.sh && cat /manifests/tempo-operator.clusterserviceversion.yaml /metadata/annotations.yaml
 
 FROM scratch

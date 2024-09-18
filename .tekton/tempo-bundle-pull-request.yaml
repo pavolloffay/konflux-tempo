@@ -37,6 +37,9 @@ spec:
     value: .
   - name: build-source-image
     value: "true"
+  - name: build-args
+    value:
+      - REGISTRY=registry.redhat.io
   - name: hermetic
     value: "false"
   pipelineRef:
