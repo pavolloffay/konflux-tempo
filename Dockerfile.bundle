@@ -1,5 +1,5 @@
 # Based on ./gatekeeper-operator/bundle.Dockerfile
-FROM registry.access.redhat.com/ubi8/ubi-minimal:latest as builder-runner
+FROM registry.redhat.io/ubi8/ubi-minimal:8.10-1052.1724178568 as builder-runner
 RUN microdnf install -y skopeo jq python3 python3-pip patch
 RUN pip3 install --upgrade pip && pip3 install ruamel.yaml==0.17.9
 
