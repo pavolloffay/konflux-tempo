@@ -28,7 +28,7 @@ spec:
   - name: revision
     value: '{{revision}}'
   - name: prefetch-input
-    value: '[{"type": "gomod", "path": "./tempo"}, {"path": "jaeger/jaeger-ui", "type": "yarn"}, {"type": "rpm"}}]'
+    value: '[{"type": "gomod", "path": "./tempo"}, {"path": "jaeger/jaeger-ui", "type": "yarn"}, {"type": "rpm"}]'
   - name: hermetic
     value: "true"
   - name: prefetch-dev-package-managers-enabled
