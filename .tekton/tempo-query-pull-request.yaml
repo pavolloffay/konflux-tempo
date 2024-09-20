@@ -27,6 +27,14 @@ spec:
     value: '{{source_url}}'
   - name: revision
     value: '{{revision}}'
+# Error: PackageRejected: Unable to determine the yarn version to use to process the request
+#  Ensure that either yarnPath is defined in .yarnrc.yml or that packageManager is defined in package.json
+#  - name: prefetch-input
+#    value: '[{"type": "gomod", "path": "./tempo"}, {"path": "jaeger/jaeger-ui", "type": "yarn"}, {"type": "rpm"}]'
+#  - name: hermetic
+#    value: "true"
+#  - name: prefetch-dev-package-managers-enabled
+#    value: "true"
   - name: output-image
     value: quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-query:on-pr-{{revision}}
   - name: image-expires-after

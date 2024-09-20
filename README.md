@@ -25,8 +25,9 @@ Open PR `Release - update bundle version` and update [patch_csv.yaml](./bundle-p
 Once the PR is merged and bundle is built. Open another PR `Release - update catalog` with:
 * Updated [catalog template](./catalog/catalog-template.json) with the new bundle (get the bundle pullspec from [Konflux](https://console.redhat.com/application-pipeline/workspaces/rhosdt/applications/otel/components/tempo-bundle)):
    ```bash
-   opm alpha render-template basic catalog/catalog-template.json > catalog/tempo-product/catalog.json && \
-   opm validate catalog/tempo-product/ 
+   opm alpha render-template basic --output yaml catalog/catalog-template.yaml > catalog/tempo-product/catalog.yaml && \
+   sed -i 's#quay.io/redhat-user-workloads/rhosdt-tenant/tempo/tempo-bundle#registry.redhat.io/rhosdt/tempo-operator-bundle#g' catalog/tempo-product/catalog.yaml  && \
+   opm validate catalog/tempo-product/
    ```
 
 (TODO verify) After konflux builds the bundle create one more PR to change the registry to `registry.redhat.io` see https://konflux-ci.dev/docs/advanced-how-tos/releasing/maintaining-references-before-release/
