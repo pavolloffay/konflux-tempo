@@ -58,7 +58,7 @@ spec:
             cpu: 300m
             memory: 256Mi
           limits:
-            memory: 2Gi
+            memory: 4Gi
   workspaces:
     - name: git-auth
       secret:
