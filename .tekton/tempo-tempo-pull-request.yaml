@@ -50,7 +50,15 @@ spec:
   #     - linux/s390x
   pipelineRef:
     name: build-pipeline
-  taskRunTemplate: {}
+  taskRunTemplate:
+    taskRunSpecs:
+      - pipelineTaskName: build-container
+        computeResources:
+          requests:
+            cpu: 300m
+            memory: 256Mi
+          limits:
+            memory: 2Gi
   workspaces:
     - name: git-auth
       secret:
