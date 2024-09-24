@@ -21,6 +21,14 @@ metadata:
   name: tempo-tempo-on-push
   namespace: rhosdt-tenant
 spec:
+  taskRunSpecs:
+    - pipelineTaskName: prefetch-dependencies
+      computeResources:
+        requests:
+          cpu: 300m
+          memory: 256Mi
+        limits:
+          memory: 4Gi
   params:
   - name: git-url
     value: '{{source_url}}'
@@ -48,15 +56,7 @@ spec:
       - linux/s390x
   pipelineRef:
     name: build-pipeline
-  taskRunTemplate:
-    taskRunSpecs:
-      - pipelineTaskName: prefetch-dependencies
-        computeResources:
-          requests:
-            cpu: 300m
-            memory: 256Mi
-          limits:
-            memory: 4Gi
+  taskRunTemplate: {}
   workspaces:
     - name: git-auth
       secret:
