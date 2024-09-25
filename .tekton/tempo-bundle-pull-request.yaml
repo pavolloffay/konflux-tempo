@@ -43,9 +43,6 @@ spec:
     value: .
   - name: build-source-image
     value: "true"
-  - name: build-args
-    value:
-      - REGISTRY=registry.redhat.io
   pipelineRef:
     name: single-arch-build-pipeline
   workspaces:
