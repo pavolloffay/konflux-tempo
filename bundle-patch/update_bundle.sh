@@ -21,7 +21,7 @@ if [[ $REGISTRY == "registry.redhat.io" ||  $REGISTRY == "registry.stage.redhat.
   TEMPO_IMAGE_PULLSPEC="$REGISTRY/rhosdt/tempo-rhel8@${TEMPO_IMAGE_PULLSPEC:(-71)}"
   TEMPO_QUERY_IMAGE_PULLSPEC="$REGISTRY/rhosdt/tempo-query-rhel8@${TEMPO_QUERY_IMAGE_PULLSPEC:(-71)}"
   TEMPO_GATEWAY_IMAGE_PULLSPEC="$REGISTRY/rhosdt/tempo-gateway-rhel8@${TEMPO_GATEWAY_IMAGE_PULLSPEC:(-71)}"
-  TEMPO_OPA_IMAGE_PULLSPEC="$REGISTRY/rhosdt/tempo-opa-rhel8@${TEMPO_OPA_IMAGE_PULLSPEC:(-71)}"
+  TEMPO_OPA_IMAGE_PULLSPEC="$REGISTRY/rhosdt/tempo-gateway-opa-rhel8@${TEMPO_OPA_IMAGE_PULLSPEC:(-71)}"
   TEMPO_OPERATOR_IMAGE_PULLSPEC="$REGISTRY/rhosdt/tempo-rhel8-operator@${TEMPO_OPERATOR_IMAGE_PULLSPEC:(-71)}"
 fi
 
