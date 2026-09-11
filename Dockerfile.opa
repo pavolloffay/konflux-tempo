@@ -1,5 +1,4 @@
 FROM registry.redhat.io/ubi9/ubi:latest@sha256:206b65b8ee0f04b992818c9a51b29081b14974630d4850bc358097d0c44ea156 AS builder
-
 WORKDIR /opt/app-root/src
 USER root
 
@@ -15,11 +14,25 @@ WORKDIR /opt/app-root/src/opa-openshift
 
 RUN CGO_ENABLED=0 GOFIPS140=certified go build -mod=mod -tags no_openssl -o opa-openshift -trimpath -ldflags "-s -w"
 
-FROM registry.redhat.io/ubi9/ubi-micro:latest@sha256:f332c99eb8f798a8486821c91937f10ad64ee83d7e739303be2df051040918f6
-ARG VERSION=0.22.0-1
+FROM registry.redhat.io/ubi9/ubi-micro:latest@sha256:f332c99eb8f798a8486821c91937f10ad64ee83d7e739303be2df051040918f6 AS ubi-micro-base
+FROM registry.redhat.io/ubi9/ubi:latest@sha256:206b65b8ee0f04b992818c9a51b29081b14974630d4850bc358097d0c44ea156 AS image-builder
+COPY --from=ubi-micro-base / /mnt/rootfs
 
-RUN mkdir /licenses
-COPY opa-openshift/LICENSE /licenses/.
+RUN rpm --root /mnt/rootfs --import /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release && \
+    dnf install -y \
+      --installroot /mnt/rootfs \
+      --releasever 9 \
+      --setopt install_weak_deps=false \
+      --setopt reposdir=/etc/yum.repos.d \
+      --nodocs \
+      ca-certificates && \
+    dnf clean all --installroot /mnt/rootfs && \
+    rm -rf /mnt/rootfs/var/cache/*
+
+FROM scratch
+WORKDIR /
+COPY --from=image-builder /mnt/rootfs/ /
+COPY opa-openshift/LICENSE /licenses/
 COPY --from=builder /opt/app-root/src/opa-openshift/opa-openshift /usr/bin/opa-openshift
 
 ENV GODEBUG=fips140=auto
@@ -27,6 +40,7 @@ ARG USER_UID=1001
 USER ${USER_UID}
 ENTRYPOINT ["/usr/bin/opa-openshift"]
 
+ARG VERSION=0.22.0-2
 LABEL release="${VERSION}" \
       version="${VERSION}" \
       vendor="Red Hat, Inc." \

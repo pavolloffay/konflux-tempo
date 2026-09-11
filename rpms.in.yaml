@@ -9,6 +9,7 @@ packages:
   - git
   - golang
   - patch
+  - ca-certificates
 arches:
   - x86_64
   - aarch64
@@ -17,3 +18,7 @@ arches:
 context:
   containerfile:
     file: Dockerfile.operator
+    # The lock file generator uses a layer from the Dockerfile to determine the base image.
+    # Then it includes all the RPM packages that are needed to install the packages from this file including its dependencies.
+    # The ubi-micro has fewer installed RPMs therefore the lock file is larger than for ubi-minimal.
+    stageName: ubi-micro-base
